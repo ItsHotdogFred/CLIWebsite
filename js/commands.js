@@ -10,6 +10,7 @@ const commands = {
             <span>clear</span><span>Clear the terminal</span>
             <span>clearhistory</span><span>Clear command history</span>
             <span>whoami</span><span>Display user info</span>
+            <span>rps</span><span>Play rock-paper-scissors</span>
         </div><br>`);
     },
 
@@ -63,7 +64,7 @@ const commands = {
     },
 
     clear: () => { output.innerHTML = ''; },
-    
+
     clearhistory: () => {
         commandHistory.length = 0;
         historyIndex = -1;
@@ -157,7 +158,58 @@ const commands = {
         }
     },
 
-    coinflip: () => appendOutput(Math.random(0, 1) < 0.5 ? "heads" : "tails")
+    coinflip: () => appendOutput(Math.random(0, 1) < 0.5 ? "heads" : "tails"),
+
+    rps: (args) => {
+        const choices = ['rock', 'paper', 'scissors'];
+        const playerChoice = args[0]?.toLowerCase();
+        
+        if (!playerChoice || !choices.includes(playerChoice)) {
+            appendOutput(`<div>Usage: rps [rock|paper|scissors]</div>`);
+            return;
+        }
+        
+        const computerChoice = choices[Math.floor(Math.random() * 3)];
+        const emojis = { rock: '🪨', paper: '📄', scissors: '✂️' };
+        
+        appendOutput(`<div>You: ${emojis[playerChoice]} ${playerChoice}</div>`);
+        appendOutput(`<div>Computer: ${emojis[computerChoice]} ${computerChoice}</div>`);
+        
+        if (playerChoice === computerChoice) {
+            appendOutput(`<div class="text-yellow-300">🤝 It's a tie!</div>`);
+        } else if (
+            (playerChoice === 'rock' && computerChoice === 'scissors') ||
+            (playerChoice === 'paper' && computerChoice === 'rock') ||
+            (playerChoice === 'scissors' && computerChoice === 'paper')
+        ) {
+            appendOutput(`<div class="text-green-400">🎉 You win!</div>`);
+        } else {
+            appendOutput(`<div class="text-red-400">😭 You lose!</div>`);
+        }
+
+    
+
+    },
+
+    magic8: (args) => {
+        if (!args.length) {
+            appendOutput(`<div>Usage: magic8 [your question]</div>`);
+            return;
+        }
+        
+        const responses = [
+            "It is certain", "Reply hazy, try again", "Don't count on it",
+            "It is decidedly so", "Ask again later", "My reply is no",
+            "Without a doubt", "Better not tell you now", "My sources say no",
+            "Yes definitely", "Cannot predict now", "Outlook not so good",
+            "You may rely on it", "Concentrate and ask again", "Very doubtful",
+            "As I see it, yes", "Most likely", "Outlook good", "Yes", "Signs point to yes"
+        ];
+        
+        const response = responses[Math.floor(Math.random() * responses.length)];
+        appendOutput(`<div class="text-purple-400">🎱 Magic 8-Ball says: "${response}"</div>`);
+},
+
 };
 
 // Export for use in other modules
