@@ -1,0 +1,33 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevent scrollbars on the body */
+}
+body {
+    font-family: 'Fira+Code', monospace;
+    color: #e0e0e0;
+    background-color: #1a1b26;
+}
+.terminal {
+    background-color: #1a1b26;
+    height: 100vh;
+    width: 100vw;
+}
+/* Style the input field's caret */
+#commandInput:focus {
+    outline: none;
+    border: none;
+    box-shadow: none;
+    /* Use a block-style caret that matches the theme */
+    caret-color: #a9b1d6;
+    caret-shape: block;
+}
+.directory { color: #7aa2f7; }
+.file { color: #9ece6a; }
+/* This class makes ls output interactive */
+.selectable-item {
+    cursor: pointer;
+}
+.prompt-user { color: #c0caf5; }
+.prompt-symbol { color: #f7768e; } 

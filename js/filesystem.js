@@ -1,0 +1,82 @@
+// --- File System Simulation ---
+const fileSystem = {
+    'Aboutme': {
+        type: 'directory',
+        content: {
+            'bio.txt': { type: 'file', content: `Hello! I'm a passionate developer who likes to create games using gdscript inside the Godot Game engine. I like to build custom systems which make my life easier or improve game performance.` },
+            'contact.txt': { type: 'file', content: `You can find me on:\n- GitHub:   github.com/ItsHotdogFred\n- Itch.io:  itshotdogfred.itch.io\n- Email:    cli@itsfred.dev` },
+            'skills.txt': { type: 'file', content: `░██████╗░░█████╗░██████╗░░█████╗░████████╗
+██╔════╝░██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝
+██║░░██╗░██║░░██║██║░░██║██║░░██║░░░██║░░░
+██║░░╚██╗██║░░██║██║░░██║██║░░██║░░░██║░░░
+╚██████╔╝╚█████╔╝██████╔╝╚█████╔╝░░░██║░░░
+░╚═════╝░░╚════╝░╚═════╝░░╚════╝░░░░╚═╝░░░
+
+My Skills:
+- Godot (guh - dow) Game Developer
+- Gdscript (Godots Built in Language)
+- HTML, CSS, Bit of JS & TS
+- Tailwind CSS
+- Level 2 Svelte user
+- LLMs
+- Procrastinating `}
+        }
+    },
+    'Projects': {
+        type: 'directory',
+        content: {
+            'cli-website.md': { type: 'file', content: `## The very website you're exploring right now!\n---------------------------------------\nI've been wanting to create a website for myself for a while now\nbut haven't had a good idea for what it should be it, till now!`},
+            'pixelator.md': { type: 'file', content: `## Itch.io game - Pixelator\nPixelator is the first game I released! It's a short but challenging game, \nmaking the game taught me alot about the Godot Engine and now it's my choice of Game Engine.`}
+        }
+    },
+    'README.md': { type: 'file', content: `Welcome to my interactive website!\n\nThis is a simulated terminal environment.\nHere are some commands you can try:\n- 'help'          : Show available commands.\n- 'ls'            : List files and directories.\n- 'cd [dir]'      : Change directory (e.g., 'cd Aboutme'). Use 'cd ..' to go back.\n- 'cat [file]'    : View the contents of a file.\n- 'clear'         : Clear the terminal screen.\n\nPro-tips:\n- Items from 'ls' command are clickable!\n- Use Tab for autocompletion.\n- Use Arrow Keys (Up/Down) for command history.\n` }
+};
+
+// --- State ---
+let cwd = fileSystem;
+let path = [];
+
+// --- Utility Functions ---
+function findKeyCaseInsensitive(obj, key) {
+    if (!key) return null;
+    const lowerKey = key.toLowerCase();
+    return Object.keys(obj).find(k => k.toLowerCase() === lowerKey);
+}
+
+function resolvePath(targetPath) {
+    let tempPath = [...path];
+    if (targetPath === '..') {
+        if (tempPath.length > 0) tempPath.pop();
+    } else if (targetPath) {
+        let currentLevel = fileSystem;
+        for (const part of path) {
+            currentLevel = currentLevel[part].content;
+        }
+        const realKey = findKeyCaseInsensitive(currentLevel, targetPath);
+        const targetNode = realKey ? currentLevel[realKey] : null;
+        if (targetNode && targetNode.type === 'directory') {
+            tempPath.push(realKey);
+        } else {
+            return { error: `cd: no such file or directory: ${targetPath}` };
+        }
+    } else {
+        tempPath = [];
+    }
+    let newCwd = fileSystem;
+    for (const dir of tempPath) {
+        newCwd = newCwd[dir].content;
+    }
+    return { newCwd, newPath: tempPath };
+}
+
+function escapeHtml(unsafe) {
+    return unsafe.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+}
+
+// Export for use in other modules
+window.fileSystem = fileSystem;
+window.cwd = cwd;
+window.path = path;
+window.findKeyCaseInsensitive = findKeyCaseInsensitive;
+window.resolvePath = resolvePath;
+window.escapeHtml = escapeHtml; 
