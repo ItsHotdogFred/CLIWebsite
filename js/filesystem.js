@@ -26,10 +26,10 @@ My Skills:
         type: 'directory',
         content: {
             'cli-website.md': { type: 'file', content: `## The very website you're exploring right now!\n---------------------------------------\nI've been wanting to create a website for myself for a while now\nbut haven't had a good idea for what it should be it, till now!`},
-            'pixelator.md': { type: 'file', content: `## Itch.io game - Pixelator\nPixelator is the first game I released! It's a short but challenging game, \nmaking the game taught me alot about the Godot Engine and now it's my choice of Game Engine.`}
+            'pixelator.md': { type: 'file', content: `## Itch.io game - Pixelator\n---------------------------------------\nPixelator is the first game that I released! It's a short but challenging game, \nmaking the game taught me alot about the Godot Engine and now it's my choice of Game Engine.\nHere is a link to the game: https://itshotdogfred.itch.io/pixelator` },
         }
     },
-    'README.md': { type: 'file', content: `Welcome to my interactive website!\n\nThis is a simulated terminal environment.\nHere are some commands you can try:\n- 'help'          : Show available commands.\n- 'ls'            : List files and directories.\n- 'cd [dir]'      : Change directory (e.g., 'cd Aboutme'). Use 'cd ..' to go back.\n- 'cat [file]'    : View the contents of a file.\n- 'clear'         : Clear the terminal screen.\n\nPro-tips:\n- Type 'ls' to show folders and files!\n- Items from 'ls' command are clickable!\n- Use Tab for autocompletion.\n- Use Arrow Keys (Up/Down) for command history.\n` },
+    'README.md': { type: 'file', content: `Welcome to my interactive website!\nThis is a simulated terminal environment.\nHere are some commands you can try:\n- 'help'          : Show available commands.\n- 'ls'            : List files and directories.\n- 'cd [dir]'      : Change directory (e.g., 'cd Aboutme'). Use 'cd ..' to go back.\n- 'cat [file]'    : View the contents of a file.\n- 'clear'         : Clear the terminal screen.\n\nPro-tips:\n- Type 'ls' to show folders and files!\n- Items from 'ls' command are clickable!\n- Use Tab for autocompletion.\n- Use Arrow Keys (Up/Down) for command history.\n` },
     'Top-Secret': {
         type: 'directory',
         content: {
