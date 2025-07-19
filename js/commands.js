@@ -226,32 +226,32 @@ const commands = {
         
         appendOutput(`<div class="neofetch-output">
             <pre class="text-sm">
-<span class="text-cyan-400">                .88888888:.              </span> <span class="text-green-400">guest</span>@<span class="text-green-400">web-terminal</span>
-<span class="text-cyan-400">               88888888.88888.           </span> <span class="text-gray-400">-----------------</span>
-<span class="text-cyan-400">             .8888888888888888.          </span> <span class="text-blue-400">OS:</span> WebOS Terminal v1.0
-<span class="text-cyan-400">             888888888888888888          </span> <span class="text-blue-400">Kernel:</span> Browser Engine
-<span class="text-cyan-400">             88' _\`88'_  \`88888          </span> <span class="text-blue-400">Uptime:</span> ${uptimeHours}h ${uptimeMinutes}m ${uptimeSeconds}s
-<span class="text-cyan-400">             88 88 88 88  88888          </span> <span class="text-blue-400">Shell:</span> WebShell 1.0
-<span class="text-cyan-400">             88_88_::_88_:88888          </span> <span class="text-blue-400">Resolution:</span> ${window.screen.width}x${window.screen.height}
-<span class="text-cyan-400">             88:::,::,:::::8888          </span> <span class="text-blue-400">Terminal:</span> CLI Website
-<span class="text-cyan-400">             88\`:::::::::\`8888          </span> <span class="text-blue-400">CPU:</span> ${cores} cores
-<span class="text-cyan-400">            .88  \`::::\`    8:88.         </span> <span class="text-blue-400">Memory:</span> ${memory}
-<span class="text-cyan-400">           8888            \`8:888.       </span> <span class="text-blue-400">Language:</span> ${language}
-<span class="text-cyan-400">         .8888\`             \`888888.     </span> <span class="text-blue-400">Platform:</span> ${platform}
-<span class="text-cyan-400">        .8888:..  .::.  ...:\`8888888:.   </span> <span class="text-blue-400">Connection:</span> ${connection}
-<span class="text-cyan-400">       .8888.\`     :\`     \`\`::\`88:88888  </span> 
-<span class="text-cyan-400">      .8888        \`         \`.888:8888. </span> <span class="text-red-400">███</span><span class="text-yellow-400">███</span><span class="text-green-400">███</span><span class="text-cyan-400">███</span><span class="text-blue-400">███</span><span class="text-purple-400">███</span><span class="text-pink-400">███</span><span class="text-white">███</span>
-<span class="text-cyan-400">     888:8         .           888:88888 </span> <span class="text-red-400">███</span><span class="text-yellow-400">███</span><span class="text-green-400">███</span><span class="text-cyan-400">███</span><span class="text-blue-400">███</span><span class="text-purple-400">███</span><span class="text-pink-400">███</span><span class="text-gray-400">███</span>
-<span class="text-cyan-400">   .888:88        .:           888:88888:</span>
-<span class="text-cyan-400">   8888888.       ::           88:888888 </span>
-<span class="text-cyan-400">   \`.::.888.      ::          .88888888  </span>
-<span class="text-cyan-400">  .::::::.888.    ::         :::\`8888\`.:</span>
-<span class="text-cyan-400"> ::::::::::.888   \`         .::::::::::::</span>
-<span class="text-cyan-400"> ::::::::::::.8    \`      .:8::::::::::::.</span>
-<span class="text-cyan-400">.::::::::::::::.        .:888:::::::::::::</span>
-<span class="text-cyan-400">:::::::::::::::88:.__..:88888:::::::::::\`</span>
-<span class="text-cyan-400"> \`\`.:::::::::::88888888888.88:::::::::\`  </span>
-<span class="text-cyan-400">       \`\`:::_:\` -- \`\` -\`-\` \`\`:_::::\`      </span>
+<span style="color: #87c4ed">                .88888888:.              </span> <span class="text-green-400">guest</span>@<span class="text-green-400">web-terminal</span>
+<span style="color: #87c4ed">               88888888.88888.           </span> <span class="text-gray-400">-----------------</span>
+<span style="color: #87c4ed">             .8888888888888888.          </span> <span class="text-blue-400">OS:</span> WebOS Terminal v1.0
+<span style="color: #87c4ed">             888888888888888888          </span> <span class="text-blue-400">Kernel:</span> Browser Engine
+<span style="color: #87c4ed">             88' _\`88'_  \`88888          </span> <span class="text-blue-400">Uptime:</span> ${uptimeHours}h ${uptimeMinutes}m ${uptimeSeconds}s
+<span style="color: #87c4ed">             88 88 88 88  88888          </span> <span class="text-blue-400">Shell:</span> WebShell 1.0
+<span style="color: #87c4ed">             88_88_::_88_:88888          </span> <span class="text-blue-400">Resolution:</span> ${window.screen.width}x${window.screen.height}
+<span style="color: #87c4ed">             88:::,::,:::::8888          </span> <span class="text-blue-400">Terminal:</span> CLI Website
+<span style="color: #87c4ed">             88\`:::::::::\`8888          </span> <span class="text-blue-400">CPU:</span> ${cores} cores
+<span style="color: #87c4ed">            .88  \`::::\`    8:88.         </span> <span class="text-blue-400">Memory:</span> ${memory}
+<span style="color: #87c4ed">           8888            \`8:888.       </span> <span class="text-blue-400">Language:</span> ${language}
+<span style="color: #87c4ed">         .8888\`             \`888888.     </span> <span class="text-blue-400">Platform:</span> ${platform}
+<span style="color: #87c4ed">        .8888:..  .::.  ...:\`8888888:.   </span> <span class="text-blue-400">Connection:</span> ${connection}
+<span style="color: #87c4ed">       .8888.\`     :\`     \`\`::\`88:88888  </span> 
+<span style="color: #87c4ed">      .8888        \`         \`.888:8888. </span> <span class="text-red-400">███</span><span class="text-yellow-400">███</span><span class="text-green-400">███</span><span class="text-cyan-400">███</span><span class="text-blue-400">███</span><span class="text-purple-400">███</span><span class="text-pink-400">███</span><span class="text-white">███</span>
+<span style="color: #87c4ed">     888:8         .           888:88888 </span> <span class="text-red-400">███</span><span class="text-yellow-400">███</span><span class="text-green-400">███</span><span class="text-cyan-400">███</span><span class="text-blue-400">███</span><span class="text-purple-400">███</span><span class="text-pink-400">███</span><span class="text-gray-400">███</span>
+<span style="color: #87c4ed">   .888:88        .:           888:88888:</span>
+<span style="color: #87c4ed">   8888888.       ::           88:888888 </span>
+<span style="color: #87c4ed">   \`.::.888.      ::          .88888888  </span>
+<span style="color: #87c4ed">  .::::::.888.    ::         :::\`8888\`.:</span>
+<span style="color: #87c4ed"> ::::::::::.888   \`         .::::::::::::</span>
+<span style="color: #87c4ed"> ::::::::::::.8    \`      .:8::::::::::::.</span>
+<span style="color: #87c4ed">.::::::::::::::.        .:888:::::::::::::</span>
+<span style="color: #87c4ed">:::::::::::::::88:.__..:88888:::::::::::\`</span>
+<span style="color: #87c4ed"> \`\`.:::::::::::88888888888.88:::::::::\`  </span>
+<span style="color: #87c4ed">       \`\`:::_:\` -- \`\` -\`-\` \`\`:_::::\`      </span>
             </pre>
         </div>`);
     },
