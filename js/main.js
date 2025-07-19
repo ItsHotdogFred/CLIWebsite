@@ -171,6 +171,7 @@ commandInput.addEventListener('keydown', (e) => {
 function init() {
     loadCommandHistory(); // Load command history from localStorage
     appendOutput(`<div>Welcome to ItsFred.dev CLI (v1.0.0)</div>`);
+    processCommand('neofetch');
     processCommand('cat README.md');
     processCommand('ls');
     commandInput.focus();
