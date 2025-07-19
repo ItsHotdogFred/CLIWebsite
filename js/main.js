@@ -8,6 +8,30 @@ const commandInput = document.getElementById('commandInput');
 let commandHistory = [];
 let historyIndex = -1;
 
+// Load command history from localStorage on startup
+function loadCommandHistory() {
+    const savedHistory = localStorage.getItem('cliCommandHistory');
+    if (savedHistory) {
+        try {
+            commandHistory = JSON.parse(savedHistory);
+            historyIndex = commandHistory.length;
+        } catch (e) {
+            console.warn('Failed to load command history from localStorage:', e);
+            commandHistory = [];
+            historyIndex = -1;
+        }
+    }
+}
+
+// Save command history to localStorage
+function saveCommandHistory() {
+    try {
+        localStorage.setItem('cliCommandHistory', JSON.stringify(commandHistory));
+    } catch (e) {
+        console.warn('Failed to save command history to localStorage:', e);
+    }
+}
+
 // --- Utility Functions ---
 function getPrompt() {
     const pathString = path.length > 0 ? `~/${path.join('/')}` : '~';
@@ -76,6 +100,7 @@ function processCommand(commandStr) {
     
     if (commandStr.trim() !== '') {
         commandHistory.push(commandStr);
+        saveCommandHistory(); // Save to localStorage after adding new command
     }
     historyIndex = commandHistory.length;
 
@@ -144,6 +169,7 @@ commandInput.addEventListener('keydown', (e) => {
 
 // --- Initialization ---
 function init() {
+    loadCommandHistory(); // Load command history from localStorage
     appendOutput(`<div>Welcome to ItsFred.dev CLI (v1.0.0)</div>`);
     processCommand('cat README.md');
     processCommand('ls');
@@ -162,4 +188,6 @@ window.updatePrompt = updatePrompt;
 window.appendOutput = appendOutput;
 window.deactivateOldLinks = deactivateOldLinks;
 window.processCommand = processCommand;
+window.loadCommandHistory = loadCommandHistory;
+window.saveCommandHistory = saveCommandHistory;
 window.init = init; 

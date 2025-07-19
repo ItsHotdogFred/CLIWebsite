@@ -8,6 +8,7 @@ const commands = {
             <span>cd [dir]</span><span>Change directory</span>
             <span>cat [file]</span><span>Display file content</span>
             <span>clear</span><span>Clear the terminal</span>
+            <span>clearhistory</span><span>Clear command history</span>
             <span>whoami</span><span>Display user info</span>
         </div><br>`);
     },
@@ -62,6 +63,13 @@ const commands = {
     },
 
     clear: () => { output.innerHTML = ''; },
+    
+    clearhistory: () => {
+        commandHistory.length = 0;
+        historyIndex = -1;
+        saveCommandHistory();
+        appendOutput(`<div>Command history cleared.</div>`);
+    },
 
     whoami: () => { appendOutput(`<div>guest</div>`); },
 
