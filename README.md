@@ -96,7 +96,7 @@ const fileSystem = {
 Customize the terminal appearance in [`styles.css`](styles.css). The project uses:
 - CSS custom properties for theming
 - Tailwind CSS classes for layout
-- Fira Code font for that authentic terminal feel
+- Consolas font for that authentic terminal feel
 
 ## 🌐 Live Demo
 
