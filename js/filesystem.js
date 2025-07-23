@@ -3,7 +3,7 @@ const fileSystem = {
     'Aboutme': {
         type: 'directory',
         content: {
-            'bio.txt': { type: 'file', content: `Hello! I'm a passionate developer who likes to create games using gdscript inside the Godot Game engine. I like to build custom systems which make my life easier or improve game performance.` },
+            'bio.txt': { type: 'file', content: `Hello! I'm a passionate developer who likes to create games using gdscript inside the Godot Game engine. I like to build custom systems which make my life easier or improve game performance. I've only released a few games that I've made which are on itch.io. I'm currently creating a rougelike / bullet hell game set in space.` },
             'contact.txt': { type: 'file', content: `You can find me on:\n- GitHub:   github.com/ItsHotdogFred\n- Itch.io:  itshotdogfred.itch.io\n- Email:    cli@itsfred.dev` },
             'skills.txt': { type: 'file', content: `░██████╗░░█████╗░██████╗░░█████╗░████████╗
 ██╔════╝░██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝
@@ -19,7 +19,8 @@ My Skills:
 - Tailwind CSS
 - Level 2 Svelte user
 - LLMs
-- Procrastinating `}
+- Procrastinating 
+- Golang (Currently learning and using to create cli tools)`}
         }
     },
     'Projects': {
@@ -27,6 +28,7 @@ My Skills:
         content: {
             'cli-website.md': { type: 'file', content: `## The very website you're exploring right now!\n---------------------------------------\nI've been wanting to create a website for myself for a while now\nbut haven't had a good idea for what it should be it, till now!`},
             'pixelator.md': { type: 'file', content: `## Itch.io game - Pixelator\n---------------------------------------\nPixelator is the first game that I released! It's a short but challenging game, \nmaking the game taught me alot about the Godot Engine and now it's my choice of Game Engine.\nHere is a link to the game: https://itshotdogfred.itch.io/pixelator` },
+            'space-roguelike.md': { type: 'file', content: `## Space Roguelike\n---------------------------------------\nThis is a game that I'm currently working on, it's a rougelike / bullet hell game set in space.\nI don't have much to show yet but I will update this file when I do!` }
         }
     },
     'README.md': { type: 'file', content: `Welcome to my interactive website!\nThis is a simulated terminal environment.\nHere are some commands you can try:\n- 'help'          : Show available commands.\n- 'ls'            : List files and directories.\n- 'cd [dir]'      : Change directory (e.g., 'cd Aboutme'). Use 'cd ..' to go back.\n- 'cat [file]'    : View the contents of a file.\n- 'clear'         : Clear the terminal screen.\n\nPro-tips:\n- Type 'ls' to show folders and files!\n- Items from 'ls' command are clickable!\n- Use Tab for autocompletion.\n- Use Arrow Keys (Up/Down) for command history.\n` },

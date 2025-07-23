@@ -11,6 +11,7 @@ const commands = {
             <span>clearhistory</span><span>Clear command history</span>
             <span>whoami</span><span>Display user info</span>
             <span>rps</span><span>Play rock-paper-scissors</span>
+            <span>snake</span><span>Play ASCII Snake game</span>
         </div><br>`);
     },
 
@@ -98,10 +99,10 @@ const commands = {
         appendOutput(`<div class="text-center">
             <div class="text-cyan-400 mb-2">🎮 TETRIS 🎮</div>
             <pre class="text-sm">
-            ██    ██  
-            ██    ██  
-            ██    ██  
-            ██    ██  
+            ██      ██  
+            ██      ██  
+            ██      ██  
+            ██      ██  
             ██████████
 
             Score: 1337
@@ -234,7 +235,7 @@ const commands = {
 <span style="color: #87c4ed">             88 88 88 88  88888          </span> <span class="text-blue-400">Shell:</span> WebShell 1.0
 <span style="color: #87c4ed">             88_88_::_88_:88888          </span> <span class="text-blue-400">Resolution:</span> ${window.screen.width}x${window.screen.height}
 <span style="color: #87c4ed">             88:::,::,:::::8888          </span> <span class="text-blue-400">Terminal:</span> CLI Website
-<span style="color: #87c4ed">             88\`:::::::::\`8888          </span> <span class="text-blue-400">CPU:</span> ${cores} cores
+<span style="color: #87c4ed">             88\`:::::::::\`8888           </span> <span class="text-blue-400">CPU:</span> ${cores} cores
 <span style="color: #87c4ed">            .88  \`::::\`    8:88.         </span> <span class="text-blue-400">Memory:</span> ${memory}
 <span style="color: #87c4ed">           8888            \`8:888.       </span> <span class="text-blue-400">Language:</span> ${language}
 <span style="color: #87c4ed">         .8888\`             \`888888.     </span> <span class="text-blue-400">Platform:</span> ${platform}
@@ -254,6 +255,230 @@ const commands = {
 <span style="color: #87c4ed">       \`\`:::_:\` -- \`\` -\`-\` \`\`:_::::\`      </span>
             </pre>
         </div>`);
+    },
+
+    snake: () => {
+        // Get high score from localStorage
+        const getHighScore = () => parseInt(localStorage.getItem('snake-highscore') || '0');
+        const setHighScore = (score) => localStorage.setItem('snake-highscore', score.toString());
+        
+        const gameId = `snake-game-${Date.now()}`;
+        const width = 30;
+        const height = 20;
+        
+        let snake = [{x: 15, y: 7}];
+        let direction = {x: 1, y: 0};
+        let fruit = {x: Math.floor(Math.random() * (width - 2)) + 1, y: Math.floor(Math.random() * (height - 2)) + 1};
+        let score = 0;
+        let highScore = getHighScore();
+        let gameRunning = true;
+        let gameInterval;
+        
+        const createBoard = () => {
+            let board = Array(height).fill().map(() => Array(width).fill(' '));
+            
+            // Create border
+            for (let x = 0; x < width; x++) {
+                board[0][x] = 'X';
+                board[height - 1][x] = 'X';
+            }
+            for (let y = 0; y < height; y++) {
+                board[y][0] = 'X';
+                board[y][width - 1] = 'X';
+            }
+            
+            // Place fruit
+            board[fruit.y][fruit.x] = '@';
+            
+            // Place snake
+            snake.forEach((segment, index) => {
+                if (index === 0) {
+                    board[segment.y][segment.x] = '#'; // Head
+                } else {
+                    board[segment.y][segment.x] = '#'; // Body
+                }
+            });
+            
+            return board;
+        };
+        
+        const renderGame = () => {
+            const board = createBoard();
+            const gameTimestamp = gameId.split('-')[2];
+            let gameHTML = `<div class="snake-game" id="${gameId}" style="text-align: center;">
+                <div class="mb-2">
+                    <span class="text-blue-400">Score: ${score}</span> | 
+                    <span class="text-green-400">High Score: ${highScore}</span>
+                </div>`;
+
+            if (!gameRunning) {
+                // Game over - show button in the middle of the game area
+                gameHTML += `<div style="position: relative; display: inline-block;">
+                    <pre class="text-sm select-none" style="line-height: 0.8; font-family: 'Courier New', Consolas, monospace; letter-spacing: 0; opacity: 0.3;">`;
+                
+                board.forEach((row, y) => {
+                    row.forEach((cell, x) => {
+                        if (y === 0 || y === height - 1 || x === 0 || x === width - 1) {
+                            gameHTML += '<span style="color: #666;">X</span>'; // Grey border
+                        } else if (cell === '@') {
+                            gameHTML += '<span style="color: #ff4444;">@</span>'; // Red fruit
+                        } else if (cell === '#') {
+                            gameHTML += '<span style="color: #44ff44;">#</span>'; // Green snake
+                        } else {
+                            gameHTML += ' ';
+                        }
+                    });
+                    gameHTML += '\n';
+                });
+
+                gameHTML += `</pre>
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+                        <div class="text-red-400 mb-2" style="font-weight: bold;">Game Over!</div>
+                        <button onclick="window.restartSnakeGame_${gameTimestamp}()" class="bg-blue-400 hover:bg-blue-400 px-4 py-2 rounded text-white font-bold">Restart</button>
+                    </div>
+                </div>`;
+            } else {
+                // Game running - show normal board
+                gameHTML += `<pre class="text-sm select-none" style="line-height: 0.8; font-family: 'Courier New', Consolas, monospace; letter-spacing: 0; display: inline-block;">`;
+                
+                board.forEach((row, y) => {
+                    row.forEach((cell, x) => {
+                        if (y === 0 || y === height - 1 || x === 0 || x === width - 1) {
+                            gameHTML += '<span style="color: #666;">X</span>'; // Grey border
+                        } else if (cell === '@') {
+                            gameHTML += '<span style="color: #ff4444;">@</span>'; // Red fruit
+                        } else if (cell === '#') {
+                            gameHTML += '<span style="color: #44ff44;">#</span>'; // Green snake
+                        } else {
+                            gameHTML += ' ';
+                        }
+                    });
+                    gameHTML += '\n';
+                });
+
+                gameHTML += `</pre>`;
+            }
+            
+            gameHTML += `<div class="text-sm mt-2">
+                    <div style="color: #c0caf5">Use WASD or Arrow Keys to move</div>
+                </div>
+            </div>`;
+            
+            // Find and replace the game div
+            const existingGame = document.getElementById(gameId);
+            if (existingGame) {
+                existingGame.outerHTML = gameHTML;
+            } else {
+                appendOutput(gameHTML);
+            }
+        };
+        
+        const moveSnake = () => {
+            if (!gameRunning) return;
+            
+            const head = {x: snake[0].x + direction.x, y: snake[0].y + direction.y};
+            
+            // Check wall collision
+            if (head.x <= 0 || head.x >= width - 1 || head.y <= 0 || head.y >= height - 1) {
+                endGame();
+                return;
+            }
+            
+            // Check self collision
+            if (snake.some(segment => segment.x === head.x && segment.y === head.y)) {
+                endGame();
+                return;
+            }
+            
+            snake.unshift(head);
+            
+            // Check fruit collision
+            if (head.x === fruit.x && head.y === fruit.y) {
+                score++;
+                if (score > highScore) {
+                    highScore = score;
+                    setHighScore(highScore);
+                }
+                // Generate new fruit
+                do {
+                    fruit.x = Math.floor(Math.random() * (width - 2)) + 1;
+                    fruit.y = Math.floor(Math.random() * (height - 2)) + 1;
+                } while (snake.some(segment => segment.x === fruit.x && segment.y === fruit.y));
+            } else {
+                snake.pop();
+            }
+            
+            renderGame();
+        };
+        
+        const endGame = () => {
+            gameRunning = false;
+            clearInterval(gameInterval);
+            renderGame();
+        };
+        
+        const restartGame = () => {
+            snake = [{x: 15, y: 7}];
+            direction = {x: 1, y: 0};
+            fruit = {x: Math.floor(Math.random() * (width - 2)) + 1, y: Math.floor(Math.random() * (height - 2)) + 1};
+            score = 0;
+            gameRunning = true;
+            clearInterval(gameInterval);
+            gameInterval = setInterval(moveSnake, 150);
+            renderGame();
+        };
+        
+        const handleKeyPress = (e) => {
+            if (!gameRunning) return;
+            
+            const key = e.key.toLowerCase();
+            if ((key === 'w' || key === 'arrowup') && direction.y !== 1) {
+                e.preventDefault(); // Prevent page scrolling
+                direction = {x: 0, y: -1};
+            } else if ((key === 's' || key === 'arrowdown') && direction.y !== -1) {
+                e.preventDefault(); // Prevent page scrolling
+                direction = {x: 0, y: 1};
+            } else if ((key === 'a' || key === 'arrowleft') && direction.x !== 1) {
+                e.preventDefault(); // Prevent page scrolling
+                direction = {x: -1, y: 0};
+            } else if ((key === 'd' || key === 'arrowright') && direction.x !== -1) {
+                e.preventDefault(); // Prevent page scrolling
+                direction = {x: 1, y: 0};
+            }
+        };
+        
+        // Create global restart function
+        const gameTimestamp = gameId.split('-')[2];
+        window[`restartSnakeGame_${gameTimestamp}`] = restartGame;
+        
+        // Start the game
+        document.addEventListener('keydown', handleKeyPress);
+        gameInterval = setInterval(moveSnake, 150);
+        renderGame();
+        
+        // Clean up when terminal is cleared (optional enhancement)
+        setTimeout(() => {
+            const cleanup = () => {
+                document.removeEventListener('keydown', handleKeyPress);
+                clearInterval(gameInterval);
+                // Clean up the global restart function
+                delete window[`restartSnakeGame_${gameTimestamp}`];
+            };
+            
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.type === 'childList') {
+                        const gameElement = document.getElementById(gameId);
+                        if (!gameElement) {
+                            cleanup();
+                            observer.disconnect();
+                        }
+                    }
+                });
+            });
+            
+            observer.observe(output, { childList: true, subtree: true });
+        }, 100);
     },
 
 
