@@ -35,7 +35,7 @@ My Skills:
     'Top-Secret': {
         type: 'directory',
         content: {
-            '!@&%*@(%).txt': { type: 'file', content: `You weren't supposed to find this!\noh well...\nHere are some cool commands you can try out!\n- rickroll\n- fortune\n- tetris\n- matrix\n- rm\n- coinflip\n- magic8\n- snake\n` }
+            '!@&%*@(%).txt': { type: 'file', content: `You weren't supposed to find this!\noh well...\nHere are some cool commands you can try out!\n- rickroll\n- fortune\n- tetris\n- matrix\n- rm\n- coinflip\n- magic8\n- snake\n- wiki\n- dog\n- cat\n- joke\n` }
         }
     }
 };

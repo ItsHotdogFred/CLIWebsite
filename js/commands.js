@@ -12,6 +12,9 @@ const commands = {
             <span>whoami</span><span>Display user info</span>
             <span>rps</span><span>Play rock-paper-scissors</span>
             <span>snake</span><span>Play ASCII Snake game</span>
+            <span>secret</span><span>Show secret commands</span>
+            <span>fortune</span><span>Get a random fortune</span>
+            <span>wiki [query]</span><span>Search Wikipedia</span>
         </div><br>`);
     },
 
@@ -103,7 +106,7 @@ const commands = {
             ██      ██  
             ██      ██  
             ██      ██  
-            ██████████
+          ██████████
 
             Score: 1337
             Level: 42
@@ -480,6 +483,79 @@ const commands = {
             observer.observe(output, { childList: true, subtree: true });
         }, 100);
     },
+    secret: () => {
+        appendOutput(`\nHere are some cool commands you can try out!\n- rickroll\n- fortune\n- tetris\n- matrix\n- rm\n- coinflip\n- magic8\n- snake\n- dog\n- car\n- joke\n- wiki [search term]\n`);
+    },
+    wiki: async (args) => {
+        if (!args.length) {
+            appendOutput(`<div>Usage: wiki [search term]</div>`);
+            return;
+        }
+        const query = encodeURIComponent(args.join(' '));
+        appendOutput(`<div>Searching Wikipedia for: <span class="text-blue-400">${escapeHtml(args.join(' '))}</span></div>`);
+        try {
+            // Search for the page
+            const searchRes = await fetch(`https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${query}&format=json&origin=*`);
+            const searchData = await searchRes.json();
+            if (!searchData.query.search.length) {
+                appendOutput(`<div class="text-red-400">No results found.</div>`);
+                return;
+            }
+            const pageTitle = searchData.query.search[0].title;
+            // Get the summary
+            const summaryRes = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(pageTitle)}`);
+            const summaryData = await summaryRes.json();
+            appendOutput(`<div class="text-green-400 font-bold">${escapeHtml(summaryData.title)}</div>`);
+            appendOutput(`<div class="text-gray-300">${escapeHtml(summaryData.extract)}</div>`);
+            appendOutput(`<div><a href="https://en.wikipedia.org/wiki/${encodeURIComponent(pageTitle)}" target="_blank" class="text-blue-400 underline">Read more on Wikipedia</a></div>`);
+        } catch (e) {
+            appendOutput(`<div class="text-red-400">Error fetching Wikipedia data.</div>`);
+        }
+    },
+    dog: () => {
+        const query = 'https://dog.ceo/api/breeds/image/random';
+        fetch(query)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                const imageUrl = data.message;
+                console.log(imageUrl);
+                appendOutput(`<div class="text-center"><img src="${imageUrl}" width="500" alt="Random Dog" class="max-w-full h-auto rounded-lg shadow-lg"></div>`);
+            })
+            .catch(error => {
+                console.error('Error fetching dog image:', error);
+            });
+    },
+    car: () => {
+        const query = 'https://cataas.com/cat?json=true';
+        fetch(query)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                const imageUrl = data.url;
+                console.log(imageUrl);
+                appendOutput(`<div class="text-center"><img src="${imageUrl}" width="500" alt="Random Cat" class="max-w-full h-auto rounded-lg shadow-lg"></div>`);
+            })
+            .catch(error => {
+                console.error('Error fetching cat image:', error);
+            });
+    },
+    joke: () => {
+        const query = 'https://icanhazdadjoke.com/'
+        fetch(query, {
+            headers: {
+                'Accept': 'text/plain'
+            }
+        })
+        .then(response => response.text())
+        .then(joke => {
+            appendOutput(`<div class="text-yellow-300">${escapeHtml(joke)}</div>`);
+        })
+        .catch(error => {
+            console.error('Error fetching joke:', error);
+            appendOutput(`<div class="text-red-400">Error fetching joke.</div>`);
+        });
+    }
 
 
 };
