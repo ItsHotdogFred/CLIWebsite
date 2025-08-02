@@ -34,6 +34,9 @@ A unique portfolio website that simulates a terminal environment in the browser.
 | `magic8 [question]` | Ask the magic 8-ball |
 | `fortune` | Get a random programming quote |
 | `exit` | Attempt to close the browser tab |
+| `dog` | Displays an image of a dog |
+| `car` | Displays an image of a cat |
+| `joke` | Displays a joke |
 
 ### 🎮 Fun Commands
 - `rickroll` - You know what this does
